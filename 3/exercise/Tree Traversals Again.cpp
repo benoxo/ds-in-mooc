@@ -34,14 +34,30 @@ int IndexInArr(int a, int arr[], int start, int end) {
 	return -1;
 }
 
-void PrintPost(int &head, int in_l, int in_r) {
+//void PrintPost(int &head, int in_l, int in_r) {
+//	if (head > N) { return; }
+//	if (in_l > in_r) { head--; return; }
+//	int curroot = preorder[head]; 
+//	if (in_l < in_r) {
+//		int in_mid = IndexInArr(preorder[head], inorder, in_l, in_r);
+//		PrintPost(++head, in_l, in_mid-1);
+//		PrintPost(++head, in_mid+1, in_r);
+//	}
+//	if (curroot == preorder[0]) {
+//		printf("%d", curroot);
+//	} else {
+//		printf("%d ", curroot);
+//	}
+//}
+
+void PrintPost(int head, int in_l, int in_r) {
 	if (head > N) { return; }
-	if (in_l > in_r) { head--; return; }
+	if (in_l > in_r) { return; }
 	int curroot = preorder[head]; 
 	if (in_l < in_r) {
 		int in_mid = IndexInArr(preorder[head], inorder, in_l, in_r);
-		PrintPost(++head, in_l, in_mid-1);
-		PrintPost(++head, in_mid+1, in_r);
+		PrintPost(head+1, in_l, in_mid-1);
+		PrintPost(head+in_mid-in_l+1, in_mid+1, in_r);
 	}
 	if (curroot == preorder[0]) {
 		printf("%d", curroot);
@@ -49,6 +65,7 @@ void PrintPost(int &head, int in_l, int in_r) {
 		printf("%d ", curroot);
 	}
 }
+
 
 
 int main() {
